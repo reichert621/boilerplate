@@ -1,5 +1,4 @@
-@import (css)
-  url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,500');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,500');
 
 * {
   box-sizing: border-box;
@@ -12,3 +11,5 @@ body {
   line-height: 1.15;
   margin: 0;
 }
+
+/* Add custom styles here */
