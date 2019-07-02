@@ -1,8 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import * as request from 'superagent';
 import {Box, Flex, Heading, Text} from 'rebass';
-import {ping} from './api';
 import './App.css';
+
+const ping = () => {
+  return request.get('/api/ping').then(res => res.body.message);
+};
 
 class App extends React.Component {
   componentDidMount() {

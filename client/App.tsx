@@ -1,8 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import * as request from 'superagent';
 import {Box, Flex, Heading, Text} from 'rebass';
-import {ping} from './api';
 import './App.less';
+
+const ping = (): Promise<string> => {
+  return request.get('/api/ping').then(res => res.body.message);
+};
 
 type Props = {};
 type State = {};
