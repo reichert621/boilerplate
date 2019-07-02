@@ -1,6 +1,6 @@
 # Boilerplate
 
-Node/Express + React + TypeScript
+Node/Express + React + Babel/TypeScript
 
 ## Getting Started
 
@@ -16,6 +16,22 @@ Install the necessary packages:
 ```
 npm install
 ```
+
+## Using TypeScript
+
+If you'd like to use TypeScript/TSX instead of JavaScript/Babel, go into `webpack.config.js` and update the `entry` from `'./client/App.js'` to `'./client/App.tsx'`.
+
+That's it!
+
+Feel free to delete all Babel-related dependencies afterward. (For example: the `.babelrc` file, any package with `@babel/*`, and the `babel-loader` used in the Webpack configuration.)
+
+## Using JavaScript with Babel
+
+By default, this project uses the JS app as the entry point, with the `babel-loader` used to parse JSX and other ESNext features. So you don't have to change anything to get up and running!
+
+In this case, feel free to delete all TypeScript-related dependencies. (For example: the `client/tsconfig.json` file, the `typescript` dependency, any dependency with `@types/*`, and the `ts-loader` used in the Webpack configuration.)
+
+## Running the app
 
 Run the server in development mode:
 
