@@ -2,7 +2,6 @@ import request from 'superagent';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
-  ReactStripeElements,
   StripeProvider,
   Elements,
   CardElement,
@@ -15,14 +14,14 @@ const STRIPE_API_KEY = 'pk_test_xvX7DzC9McRTklS8RyR9xprA';
 
 // Create a charge by sending an HTTP POST request to our API endpoint
 // with the token generated from Stripe Elements below in the form
-const createCharge = (token: string) => {
+const createCharge = token => {
   return request
     .post('/api/charges')
     .send({token})
     .then(res => res.body.charge);
 };
 
-const Form = (props: ReactStripeElements.InjectedStripeProps) => {
+const Form = props => {
   const style = {
     base: {
       color: '#32325d',
@@ -39,7 +38,7 @@ const Form = (props: ReactStripeElements.InjectedStripeProps) => {
     }
   };
 
-  const handleCreateCharge = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleCreateCharge = e => {
     e.preventDefault();
 
     // We can use `props.stripe` as a result of the `injectStripe` higher
