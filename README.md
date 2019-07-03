@@ -48,6 +48,18 @@ npm run ui
 Navigate to the correct port (e.g. `localhost:3000`). You should see something like this:
 <img width="659" alt="Screen Shot 2019-06-16 at 4 33 20 PM" src="https://user-images.githubusercontent.com/5264279/59569221-81bfe400-9054-11e9-8753-cfd95b11c833.png">
 
+## Environment variables
+
+Create a `.env` file. You can do this by copying the `.env.example`:
+
+```
+cp .env.example .env
+```
+
+Variables defined here will be available at `process.env.*` in your server code.
+
+**NB:** Be sure to never check this file in, especially if it contains API keys! (The `.env` file should be included in the `.gitignore` by default in order to prevent this.)
+
 ## Production
 
 Run the server in production mode:
