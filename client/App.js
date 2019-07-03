@@ -56,7 +56,9 @@ const Form = props => {
         const token = source.id;
 
         return createCharge(token);
-      });
+      })
+      .then(charge => alert('Charge successfully created!'))
+      .catch(err => alert('Error creating a charge!'));
   };
 
   return (
