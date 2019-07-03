@@ -1,38 +1,96 @@
+import request from 'superagent';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import request from 'superagent';
-import {Box, Flex, Heading, Text} from 'rebass';
+import {
+  StripeProvider,
+  Elements,
+  CardElement,
+  injectStripe
+} from 'react-stripe-elements';
 import './App.css';
 
-const ping = () => {
-  return request.get('/api/ping').then(res => res.body.message);
+// Replace with your public key (https://dashboard.stripe.com/test/apikeys)
+const STRIPE_API_KEY = 'pk_test_xvX7DzC9McRTklS8RyR9xprA';
+
+// Create a charge by sending an HTTP POST request to our API endpoint
+// with the token generated from Stripe Elements below in the form
+const createCharge = token => {
+  return request
+    .post('/api/charges')
+    .send({token})
+    .then(res => res.body.charge);
 };
 
-class App extends React.Component {
-  componentDidMount() {
-    return ping()
-      .then(() => console.log('Server is up and running!'))
-      .catch(err => console.log('Server is down!', err));
-  }
+const Form = props => {
+  // Define our custom styles
+  const style = {
+    base: {
+      color: '#32325d',
+      fontFamily: '"Open Sans", "Helvetica Neue", Arial, san-serif',
+      fontSmoothing: 'antialiased',
+      fontSize: '16px',
+      '::placeholder': {
+        color: '#aab7c4'
+      }
+    },
+    invalid: {
+      color: '#fa755a',
+      iconColor: '#fa755a'
+    }
+  };
 
-  render() {
+  const handleCreateCharge = e => {
+    e.preventDefault();
+
+    // We can use `props.stripe` as a result of the `injectStripe` higher
+    // order component created below, and then call `createSource` to tokenize
+    // the user's credit card details provided in the <CardElement />
     return (
-      <Flex
-        p={6}
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Box mb={3}>
-          <Heading>Hello! 👋</Heading>
-        </Box>
+      props.stripe
+        .createSource({
+          type: 'card',
+          owner: {
+            name: 'Test User',
+            email: 'test@test.com'
+          }
+        })
+        .then(({source}) => {
+          const token = source.id;
 
-        <Box>
-          <Text>Get started in App.js</Text>
-        </Box>
-      </Flex>
+          return createCharge(token);
+        })
+        // We're just using `alert`s for the sake of quick, simple feedback
+        .then(charge => alert('Charge successfully created!'))
+        .catch(err => alert('Error creating a charge!'))
     );
-  }
-}
+  };
+
+  return (
+    <form className="StripeForm" onSubmit={handleCreateCharge}>
+      <CardElement style={style} />
+
+      <button type="submit">Create Charge</button>
+    </form>
+  );
+};
+
+// Calling `injectStripe` makes the `stripe` object
+// available on the <Form /> component's `props`
+const StripeForm = injectStripe(Form);
+
+// The `<StripeProvider />` passes our API key to the Stripe
+// client, and allows us to `injectStripe` into our form above.
+// The `<Elements /> component handles mounting our inputs
+// (e.g. <CardElement />) with Stripe Elements. For more details:
+// https://github.com/stripe/react-stripe-elements#getting-started
+const App = () => {
+  return (
+    <StripeProvider apiKey={STRIPE_API_KEY}>
+      <Elements>
+        <StripeForm />
+      </Elements>
+    </StripeProvider>
+  );
+};
 
 ReactDOM.render(<App />, document.getElementById('app'));
