@@ -1,6 +1,6 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import * as request from 'superagent';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import request from 'superagent';
 import {Box, Flex, Heading, Text} from 'rebass';
 import './App.css';
 
