@@ -22,7 +22,9 @@
     "express": "^4.17.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-stripe-elements": "^3.0.0",
     "rebass": "^3.1.1",
+    "stripe": "^7.4.0",
     "styled-components": "^4.3.2",
     "styled-system": "^5.0.15",
     "superagent": "^5.1.0"

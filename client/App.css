@@ -12,4 +12,27 @@ body {
   margin: 0;
 }
 
-/* Add custom styles here */
+/* Some minimal styling to center the form with some margin */
+.StripeForm {
+  margin: 40px auto;
+  max-width: 400px;
+}
+
+/* Styles our inputs and Stripe Elements consistently */
+input,
+.StripeElement {
+  height: 40px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
+}
+
+/* Customizes how inputs and Stripe Elements appear on focus */
+input:focus,
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
