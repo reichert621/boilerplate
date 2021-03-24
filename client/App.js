@@ -28,7 +28,7 @@ class App extends React.Component {
         </Box>
 
         <Box>
-          <Text>Get started in App.js</Text>
+          <Text>Ready to get started? Go to App.js</Text>
         </Box>
       </Flex>
     );
