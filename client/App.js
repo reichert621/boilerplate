@@ -24,11 +24,11 @@ class App extends React.Component {
         alignItems="center"
       >
         <Box mb={3}>
-          <Heading>Hello! 👋</Heading>
+          <Heading>Hi there! 👋</Heading>
         </Box>
 
         <Box>
-          <Text>Get started in App.js</Text>
+          <Text>Ready to get started in App.js</Text>
         </Box>
       </Flex>
     );
